@@ -11,3 +11,12 @@ class CollectionAdmin(admin.ModelAdmin):
 
     def total_products(self, collection):
         return collection.product_set.count()
+
+
+@admin.register(models.Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ["id", "placed_at", "customer_name"]
+    list_select_related = ["customer"]
+
+    def customer_name(self, order):
+        return order.customer.first_name + " " + order.customer.last_name
