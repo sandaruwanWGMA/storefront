@@ -9,5 +9,5 @@ from .serializations import ProductSerializer
 @api_view()
 def product_list(request):
     queryset = Product.objects.all()
-    serializer = ProductSerializer(queryset, many=True)
+    serializer = ProductSerializer(queryset, many=True, context={"request": request})
     return Response(serializer.data)
