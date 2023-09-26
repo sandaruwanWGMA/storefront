@@ -50,6 +50,14 @@ def product_detail(request, id):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@api_view(["GET", "POST"])
+def collection_list(request):
+    if request.method == "GET":
+        query_set = Collection.objects.all()
+        serializer = CollectionSerializer(query_set, many=True)
+        return Response(serializer.data)
+
+
 @api_view()
 def collection_detail(request, pk):
     collection = Collection.objects.get(id=pk)
